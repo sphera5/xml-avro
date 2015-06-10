@@ -4,6 +4,18 @@ Avro schema and avro file are generated from xsd schema and xml file.
 
 Additionally it includes simple schemaless converter that converts xml to avro and avro to xml.
 
+### Cambios en la version 0.0.2-SNAPSHOT
+- Se convierte de maven a gradle
+- Se retira compatibilidad con java 1.7
+- Se refactoriza el proyecto para definir los sourceSets ["src/main/java","src/main/resources","src/test/java","src/test/resources"]
+- Se incorporan comentarios de clase
+- Se incorporan javadocs de metodos
+- Se incorpora el bloque finally en el metodo avroToXml de la clase ly.stealth.xmlavro.simple.Converter para realizar el close del DataFileReader
+- Se corrigen @SuppressWarnings en los metodos de la clase DatumBuilder
+- Se corrige el switch en el metodo setFieldFromNode de la clase DatumBuilder
+- Se actualiza Apache Avro a la version 1.7.7
+- Se actualiza SLF4J a la version 1.7.7
+
 ## Running Project
 1. git clone;
 2. mvn package;

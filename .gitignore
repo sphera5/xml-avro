@@ -8,3 +8,5 @@ tmp
 *.jar
 *.war
 *.ear
+/bin/
+/build/
