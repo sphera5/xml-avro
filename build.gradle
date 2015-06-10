@@ -1,0 +1,72 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'ly.stealth'
+version = '0.0.2-SNAPSHOT'
+
+description = 'This project provides Converter to convert generic xsd-xml to asvc-avro files. Avro schema and avro file are generated from xsd schema and xml file.'
+
+//sourceCompatibility = 1.7
+//targetCompatibility = 1.7
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "com.github.jengelman.gradle.plugins:shadow:1.2.0"
+  }
+}
+
+// Apply application plugin
+apply plugin: 'application'
+mainClassName = "ly.stealth.xmlavro.Converter"
+
+// Apply the shadow plugin to add support for Shadow
+apply plugin: "com.github.johnrengelman.shadow"
+
+repositories {
+
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+defaultTasks 'build', 'shadowJar'
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java"]
+        }
+    }
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+dependencies {
+    //compile group: 'org.apache.avro', name: 'avro', version:'1.7.5'
+    compile group: 'org.apache.avro', name: 'avro', version:'1.7.7'
+    //compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.5'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.7'
+    compile group: 'org.skyscreamer', name: 'jsonassert', version:'1.2.3'
+    compile group: 'xerces', name: 'xercesImpl', version:'2.11.0'
+    testCompile group: 'junit', name: 'junit', version:'4.8.1'
+}
+
+jar {
+    manifest {
+        attributes 'Manifest-Version': ManifestVersion,
+                   'Main-Class': mainClassName,
+                   'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                   'Bundle-Description': BundleDescription,
+                   'Implementation-Title': project.name,
+                   'Implementation-Version': project.version,
+                   'Implementation-Vendor': ImplementationVendor,
+                   'Built-By': System.getProperty('user.name'),
+                   'Built-JDK': System.getProperty('java.version')+' ('+System.getProperty('java.vendor')+')',
+                   'Build-Time': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                   'Source-Compatibility': project.sourceCompatibility,
+                   'Target-Compatibility': project.targetCompatibility
+    }
+}
