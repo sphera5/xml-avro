@@ -5,7 +5,7 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *    http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -464,7 +464,8 @@ public class ConverterTest {
       assertEquals(Schema.Type.RECORD, elementType.getType());
     }
 
-    @Test
+    @SuppressWarnings("rawtypes")
+	@Test
     public void arrayOfChoiceElements() {
       String xsd =
               "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>" +
@@ -569,7 +570,7 @@ public class ConverterTest {
                 "  </xs:element>" +
                 "</xs:schema>";
 
-        String xml = 
+        String xml =
                 "<root>" +
                     "<s>s</s>" +
                     "<i>1</i>" +
